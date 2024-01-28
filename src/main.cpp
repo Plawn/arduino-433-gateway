@@ -6,9 +6,9 @@
 #include <Arduino_JSON.h>
 
 
-String serverName = "http://192.168.2.6:3555/";
-const auto ssid = "STARCOM-NET";
-const auto password = "EPR408EPR408";
+const auto serverName = "http://192.168.2.6:3555/";
+const auto ssid = "";
+const auto password = "";
 Gyver433_RX<SDA, 12> rx; // указали пин и размер буфера
 // Gyver433_TX<2> tx;  // указали пин
 // формат пакета для приёма (такой же как отправляется)
@@ -70,14 +70,14 @@ void loop()
         HTTPClient http;
 
         // Your Domain name with URL path or IP address with path
-        http.begin(client, serverName.c_str());
+        http.begin(client, serverName);
         JSONVar doc;
         // Set the values in the document
         doc["id"] = data.id;
         doc["temperature"] = data.temperature;
         doc["value"] = data.value;
         // Send HTTP GET request
-        auto jsonString = JSON.stringify(doc);
+        const auto jsonString = JSON.stringify(doc);
 
         const auto httpResponseCode = http.POST(jsonString);
 
